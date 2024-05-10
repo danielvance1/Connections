@@ -1,0 +1,12 @@
+.completed{
+    width:294px;
+    height:69px;
+    background:green;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3px;
+    border-radius: 5px;
+}

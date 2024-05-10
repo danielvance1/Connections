@@ -1,0 +1,25 @@
+.notSelected{
+    width:69px;
+    height:69px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: red;
+    font-size: 13px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected{
+    width:69px;
+    height:69px;
+    margin: 3px;
+    border-radius: 5px;
+    background-color: gray;
+    font-size: 13px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

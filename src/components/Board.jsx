@@ -7,7 +7,22 @@ import Completed from "./Completed"
 import { useState } from "react"
 
 const DUMMY_DATA = [
-    "Cart", "Frog", "Lightbulb", "Bicycle", "Ocean", "Piano", "Umbrella", "Mountain", "Camera", "Backpack", "Strawberry", "Telescope", "Cookie", "Moon", "Robot", "Guitar"
+    {
+        category: "Animals",
+        words: ["frog", "tiger", "dog", "snake"]
+    },
+    {
+        category: "Food",
+        words: ["pizza", "corndog", "watermelon", "jello"]
+    },
+    {
+        category: "Chess Pieces",
+        words: ["king", "queen", "knight", "bishop"]
+    },
+    {
+        category: "Furniture",
+        words: ["chair", "table", "dresser", "desk"]
+    }
 ]
 
 function Board(){
@@ -16,10 +31,19 @@ function Board(){
     // -selected/not selected
     let transformedData = []
     for (let i = 0; i < DUMMY_DATA.length; i++) {
-        transformedData.push({
-            word: DUMMY_DATA[i],
-            selected: false
-        });
+        for(let j = 0; j < DUMMY_DATA[i].words.length; j++){
+            transformedData.push({
+                category: DUMMY_DATA[i].category,
+                word: DUMMY_DATA[i].words[j],
+                selected: false
+            });
+        }
+    }
+
+    //randomize the words
+    for (let i = transformedData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Generate random index
+        [transformedData[i], transformedData[j]] = [transformedData[j], transformedData[i]]; // Swap elements
     }
 
     const [board, setBoard] = useState(transformedData)
@@ -43,6 +67,15 @@ function Board(){
 
     function submitHandler(){
         if(numSelected < 4) return
+
+        let category = ""
+        for(let i = 0; i < board.length; i++){
+            if(!board[i].selected) continue
+            if(category === "" || category === board[i].category){
+                category = board[i].category
+            }
+            else return
+        }
 
         let newCompleted = JSON.parse(JSON.stringify(completed));
         newCompleted.push([])

@@ -1,7 +1,11 @@
 import classes from "./Cell.module.css"
 
 function Cell(props){
-    return <div onClick={props.switchCell} className={props.selected ? classes.selected : classes.notSelected}>
+    let cellClass = props.selected ? classes.selected : classes.notSelected
+    if(props.warning) cellClass = classes.warning
+    //else if(props.solved) cellClass = classes.solved
+
+    return <div onClick={props.switchCell} className={cellClass}>
         {props.word}
     </div>
 }

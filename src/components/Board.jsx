@@ -35,7 +35,9 @@ function Board(){
             transformedData.push({
                 category: DUMMY_DATA[i].category,
                 word: DUMMY_DATA[i].words[j],
-                selected: false
+                selected: false,
+                warning: false,
+                solve: false
             });
         }
     }
@@ -69,15 +71,36 @@ function Board(){
         if(numSelected < 4) return
 
         let category = ""
+        let bad = false
         for(let i = 0; i < board.length; i++){
             if(!board[i].selected) continue
             if(category === "" || category === board[i].category){
                 category = board[i].category
             }
             else {
-                console.log(board[i].word)
-                return
+                bad = true
             }
+        }
+
+        if(bad){
+            let warningBoard = JSON.parse(JSON.stringify(board));
+            for(let i = 0; i < warningBoard.length; i++){
+                if(warningBoard[i].selected){
+                    warningBoard[i].warning = true
+                }
+            }
+            setBoard(warningBoard)
+
+            setTimeout(() => {
+                // Reset warnings
+                let normalBoard = JSON.parse(JSON.stringify(board));
+                for (let i = 0; i < normalBoard.length; i++) {
+                    normalBoard[i].warning = false;
+                }
+                setBoard(normalBoard);
+            }, 300);
+
+            return
         }
 
         let newCompleted = JSON.parse(JSON.stringify(completed));
@@ -108,7 +131,7 @@ function Board(){
                 <Completed key={idx} words={item.words} category={item.category}/>
             )}
             {board.map((item, idx) => 
-                <Cell key={idx} switchCell={() => switchCell(idx)} word={item.word} selected={item.selected}/>
+                <Cell key={idx} switchCell={() => switchCell(idx)} word={item.word} warning={item.warning} selected={item.selected}/>
             )}
         </div>
         <Controls submitHandler={submitHandler}/>

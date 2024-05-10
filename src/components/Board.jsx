@@ -74,11 +74,17 @@ function Board(){
             if(category === "" || category === board[i].category){
                 category = board[i].category
             }
-            else return
+            else {
+                console.log(board[i].word)
+                return
+            }
         }
 
         let newCompleted = JSON.parse(JSON.stringify(completed));
-        newCompleted.push([])
+        newCompleted.push({
+            category: category,
+            words: []
+        })
 
         let newBoard = []
 
@@ -88,7 +94,7 @@ function Board(){
                 continue
             }
 
-            newCompleted[newCompleted.length-1].push(board[i].word);
+            newCompleted[newCompleted.length-1].words.push(board[i].word);
         }
 
         setCompleted(newCompleted)
@@ -99,7 +105,7 @@ function Board(){
     return <>
         <div className={classes.board}>
             {completed.map((item, idx) => 
-                <Completed key={idx} words={item}/>
+                <Completed key={idx} words={item.words} category={item.category}/>
             )}
             {board.map((item, idx) => 
                 <Cell key={idx} switchCell={() => switchCell(idx)} word={item.word} selected={item.selected}/>

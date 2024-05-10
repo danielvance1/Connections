@@ -1,7 +1,7 @@
 .controls{
     width:300px;
     height:50px;
-    background-color: purple;
+    /* background-color: purple; */
 
     display: flex;
     flex-wrap: wrap;

@@ -8,7 +8,7 @@ function Controls(props){
     return <div className={classes.controls}>
         <Submit submitHandler={props.submitHandler}/>
         <Reset resetHandler={props.resetHandler}/>
-        <Lives numLives={props.numLives}/>
+        <Lives lifeJustLost={props.lifeJustLost} numLives={props.numLives}/>
     </div>
 }
 

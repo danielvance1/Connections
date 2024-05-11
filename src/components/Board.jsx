@@ -52,6 +52,7 @@ function Board(){
     const [numSelected, setNumSelected] = useState(0)
     const [completed, setCompleted] = useState([])
     const [numLives, setNumLives] = useState(4)
+    const [lifeJustLost, setLifeJustLost] = useState(false)
 
     function switchCell(idx){
         let newBoard = JSON.parse(JSON.stringify(board));
@@ -91,6 +92,7 @@ function Board(){
                 }
             }
             setBoard(warningBoard)
+            setLifeJustLost(true)
 
             setTimeout(() => {
                 // Reset warnings
@@ -122,6 +124,7 @@ function Board(){
                 }
 
                 setBoard(normalBoard);
+                setLifeJustLost(false)
             }, 300);
 
             setNumLives(numLives-1)
@@ -171,7 +174,7 @@ function Board(){
                 <Cell key={idx} switchCell={() => switchCell(idx)} word={item.word} warning={item.warning} selected={item.selected}/>
             )}
         </div>
-        <Controls numLives={numLives} submitHandler={submitHandler} resetHandler={resetHandler}/>
+        <Controls numLives={numLives} lifeJustLost={lifeJustLost} submitHandler={submitHandler} resetHandler={resetHandler}/>
     </>
 }
 

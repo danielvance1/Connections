@@ -1,4 +1,4 @@
-.lives{
+.livesDamage{
     animation: fall .5s ease-in-out;
 
     height:44px;
@@ -14,7 +14,19 @@
     border-radius: 20px;
 }
 
+.lives{
+    height:44px;
+    width:94px;
+    background-color: lightgreen;
+    color:black;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3px;
+    border-radius: 20px;
+}
 
 /* @keyframes fall {
     0% {

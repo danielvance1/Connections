@@ -51,6 +51,7 @@ function Board(){
     const [board, setBoard] = useState(transformedData)
     const [numSelected, setNumSelected] = useState(0)
     const [completed, setCompleted] = useState([])
+    const [numLives, setNumLives] = useState(4)
 
     function switchCell(idx){
         let newBoard = JSON.parse(JSON.stringify(board));
@@ -68,7 +69,7 @@ function Board(){
     }
 
     function submitHandler(){
-        if(numSelected < 4) return
+        if(numSelected < 4 || numLives === 0) return
 
         let category = ""
         let bad = false
@@ -97,16 +98,41 @@ function Board(){
                 for (let i = 0; i < normalBoard.length; i++) {
                     normalBoard[i].warning = false;
                 }
+                
+
+                if(numLives===1){
+                    let newCompleted = JSON.parse(JSON.stringify(completed));
+
+                    while(normalBoard.length > 0){
+                        newCompleted.push({
+                            category: normalBoard[0].category,
+                            words: [],
+                            successful: false
+                        })
+
+                        for(let i = normalBoard.length-1; i>=0; i--){
+                            if(normalBoard[i].category === normalBoard[0].category){
+                                newCompleted[newCompleted.length-1].words.push(normalBoard[i].word)
+                                normalBoard.splice(i, 1)
+                            }
+                        }
+                    }
+
+                    setCompleted(newCompleted)
+                }
+
                 setBoard(normalBoard);
             }, 300);
 
+            setNumLives(numLives-1)
             return
         }
 
         let newCompleted = JSON.parse(JSON.stringify(completed));
         newCompleted.push({
             category: category,
-            words: []
+            words: [],
+            successful: true
         })
 
         let newBoard = []
@@ -125,16 +151,27 @@ function Board(){
         setNumSelected(0)
     }
 
+    function resetHandler(){
+        let newBoard = JSON.parse(JSON.stringify(board));
+
+        for(let i = 0; i < newBoard.length; i++){
+            newBoard[i].selected = false;
+        }
+
+        setBoard(newBoard)
+        setNumSelected(0)
+    }
+
     return <>
         <div className={classes.board}>
             {completed.map((item, idx) => 
-                <Completed key={idx} words={item.words} category={item.category}/>
+                <Completed key={idx} words={item.words} category={item.category} successful={item.successful}/>
             )}
             {board.map((item, idx) => 
                 <Cell key={idx} switchCell={() => switchCell(idx)} word={item.word} warning={item.warning} selected={item.selected}/>
             )}
         </div>
-        <Controls submitHandler={submitHandler}/>
+        <Controls numLives={numLives} submitHandler={submitHandler} resetHandler={resetHandler}/>
     </>
 }
 

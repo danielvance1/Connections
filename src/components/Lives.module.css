@@ -1,0 +1,65 @@
+.lives{
+    animation: fall .5s ease-in-out;
+
+    height:44px;
+    width:94px;
+    background-color: lightgreen;
+    color:black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 3px;
+    border-radius: 20px;
+}
+
+
+
+/* @keyframes fall {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(10deg);
+    }
+    40% {
+        transform: rotate(-20deg);
+    }
+    60% {
+        transform: rotate(20deg);
+    }
+    80% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(10deg);
+    }
+} */
+
+
+@keyframes fall {
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(10deg);
+        filter: brightness(0.8); /* Red tint */
+    }
+    40% {
+        transform: rotate(-20deg);
+        filter: brightness(0.8); /* Red tint */
+    }
+    60% {
+        transform: rotate(20deg);
+        filter: brightness(0.8); /* Red tint */
+    }
+    80% {
+        transform: rotate(-20deg);
+        filter: brightness(0.8); /* Red tint */
+    }
+    100% {
+        transform: rotate(10deg);
+        filter: brightness(1); /* Restore normal brightness */
+    }
+}

@@ -1,7 +1,7 @@
-.submit{
+.reset{
     height:44px;
     width:94px;
-    background-color: aqua;
+    background-color: orange;
     color:black;
 
     display: flex;
@@ -14,6 +14,6 @@
     cursor: pointer;
 }
 
-.submit:active {
+.reset:active {
     filter: brightness(80%);
 }

@@ -1,7 +1,7 @@
 import classes from "./Completed.module.css"
 
 function Completed(props){
-    return <div className={classes.completed}>
+    return <div className={props.successful ? classes.completed : classes.unsuccessful}>
         <div className={classes.completedCategory}>
             {props.category}
         </div>

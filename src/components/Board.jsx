@@ -8,20 +8,20 @@ import { useState } from "react"
 
 const DUMMY_DATA = [
     {
-        category: "Animals",
-        words: ["frog", "tiger", "dog", "snake"]
+        category: "Mario Kart items",
+        words: ["banana", "mushroom", "turtle", "lightning"]
     },
     {
-        category: "Food",
-        words: ["pizza", "corndog", "watermelon", "jello"]
+        category: "End of MLP names",
+        words: ["jack", "dash", "shy", "pike"]
     },
     {
-        category: "Chess Pieces",
-        words: ["king", "queen", "knight", "bishop"]
+        category: "Spinning things",
+        words: ["galaxy", "wheel", "whirlpool", "top"]
     },
     {
-        category: "Furniture",
-        words: ["chair", "table", "dresser", "desk"]
+        category: "_ board",
+        words: ["diving", "chess", "spring", "white"]
     }
 ]
 
